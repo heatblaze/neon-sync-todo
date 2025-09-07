@@ -2,6 +2,8 @@
 
 A futuristic, cyberpunk-themed to-do list application built with modern web technologies. Experience task management in a neon-lit digital world with smooth animations and a sleek dark interface.
 
+🚀 **[Live Demo](https://neon-sync-todo.lovable.app)** - Try it now!
+
 ![CyberTasks Demo](https://via.placeholder.com/800x400/0a0a0f/00f5ff?text=CyberTasks+Demo)
 
 ## ✨ Features
