@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Cyberpunk To-Do App Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Cyberpunk Dark Theme */
+    --background: 258 100% 3%;           /* Deep dark purple #0a0a0f */
+    --foreground: 180 100% 95%;          /* Bright cyan white */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 258 50% 8%;                  /* Slightly lighter dark */
+    --card-foreground: 180 100% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 258 80% 5%;
+    --popover-foreground: 180 100% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Neon Blue Primary */
+    --primary: 185 100% 50%;             /* Neon cyan #00f5ff */
+    --primary-foreground: 258 100% 5%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neon Pink Secondary */
+    --secondary: 326 100% 50%;           /* Neon pink #ff007a */
+    --secondary-foreground: 258 100% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Purple Accent */
+    --accent: 285 85% 55%;               /* Purple #8e2de2 */
+    --accent-foreground: 258 100% 95%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 258 30% 15%;
+    --muted-foreground: 180 30% 70%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%;           /* Bright red */
+    --destructive-foreground: 258 100% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 258 50% 20%;
+    --input: 258 50% 12%;
+    --ring: 185 100% 50%;                /* Neon cyan ring */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Cyberpunk Colors */
+    --neon-blue: 185 100% 50%;           /* #00f5ff */
+    --neon-pink: 326 100% 50%;           /* #ff007a */
+    --neon-purple: 285 85% 55%;          /* #8e2de2 */
+    --cyber-bg: 258 100% 3%;             /* #0a0a0f */
+    --cyber-surface: 258 50% 8%;
+    --cyber-border: 258 50% 20%;
+
+    /* Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-purple)));
+    --gradient-pink: linear-gradient(135deg, hsl(var(--neon-pink)), hsl(var(--neon-purple)));
+    --gradient-cyber: linear-gradient(180deg, hsl(var(--cyber-surface)), hsl(var(--cyber-bg)));
+
+    /* Shadows & Glows */
+    --glow-blue: 0 0 20px hsl(var(--neon-blue) / 0.5);
+    --glow-pink: 0 0 20px hsl(var(--neon-pink) / 0.5);
+    --glow-purple: 0 0 15px hsl(var(--neon-purple) / 0.4);
+    --shadow-cyber: 0 8px 32px hsl(258 100% 2% / 0.8);
+
+    /* Animations */
+    --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease, border-color 0.3s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +125,66 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+    background: hsl(var(--cyber-bg));
+  }
+}
+
+@layer components {
+  /* Cyberpunk Utility Classes */
+  .cyber-glow {
+    box-shadow: var(--glow-blue);
+    transition: var(--transition-glow);
+  }
+
+  .cyber-glow:hover {
+    box-shadow: var(--glow-blue), 0 0 30px hsl(var(--neon-blue) / 0.3);
+  }
+
+  .cyber-glow-pink {
+    box-shadow: var(--glow-pink);
+    transition: var(--transition-glow);
+  }
+
+  .cyber-glow-pink:hover {
+    box-shadow: var(--glow-pink), 0 0 30px hsl(var(--neon-pink) / 0.3);
+  }
+
+  .cyber-border {
+    border: 1px solid hsl(var(--cyber-border));
+    transition: var(--transition-cyber);
+  }
+
+  .cyber-border:hover {
+    border-color: hsl(var(--neon-blue));
+    box-shadow: var(--glow-blue);
+  }
+
+  .gradient-text {
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .floating-action {
+    background: var(--gradient-neon);
+    box-shadow: var(--glow-blue), var(--shadow-cyber);
+    transition: var(--transition-cyber);
+  }
+
+  .floating-action:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--glow-blue), 0 0 30px hsl(var(--neon-blue) / 0.4), var(--shadow-cyber);
+  }
+
+  .task-completed {
+    background: linear-gradient(135deg, hsl(var(--muted)), hsl(var(--cyber-surface)));
+    opacity: 0.7;
+  }
+
+  .task-completed .task-text {
+    text-decoration: line-through;
+    color: hsl(var(--muted-foreground));
   }
 }
